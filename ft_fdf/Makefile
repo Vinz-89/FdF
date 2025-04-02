@@ -2,7 +2,7 @@ NAME = fdf
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -lm -O3
+CFLAGS = -Wall -Wextra -Werror -O3
 LFLAGS = -lmlx -lXext -lX11 -lm
 
 RM = rm -rf

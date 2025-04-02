@@ -247,10 +247,11 @@ void map_parsing(t_fdf *map, char *filename)
     }
 
     close(fd);
+    /*
     for(int i = 0; i < map->map_y; i++)
     {
         for (int j = 0; j < map->map_x; j++)
             printf("%d ", map->map_data[i][j]);
         printf("\n");
-    }
+    }*/
 }

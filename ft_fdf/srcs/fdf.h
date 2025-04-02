@@ -25,6 +25,9 @@ typedef struct s_fdf
 	float angle_z;  // Rotation autour de l'axe Z (rotation de la vue isométrique)
 
 	int scale;
+	float scale_height;
+
+	int view_type; // 0 = isométrique, 1 = perspective
 
 	int map_x;
 	int map_y;
@@ -60,6 +63,8 @@ int	get_b(int trgb);
 void draw_map(t_fdf *map);
 void draw_line(t_fdf *map, int x0, int y0, int x1, int y1, int color1, int color2);
 void project_iso(int *x, int *y, int *z, t_fdf *map);
+void project_perspec(int *x, int *y, int *z, t_fdf *map);
+
 int interpolate_color(int color1, int color2, double ratio);
 
 
