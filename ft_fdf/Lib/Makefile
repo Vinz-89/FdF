@@ -1,29 +1,42 @@
-LIBFT_DIR = Libft
-GNL_DIR = get_next_line
+NAME = lib.a
 
-LIB_NAME = lib.a
 
-all: $(LIB_NAME)
+LibftDir = Libft
+GnlDir = get_next_line
 
-$(LIB_NAME): libft gnl
-	@echo "Creating the library: $(LIB_NAME)"
-	@ar rcs $(LIB_NAME) $(LIBFT_DIR)/*.o $(GNL_DIR)/*.o
+Libft = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c\
+		ft_substr.c	ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
+#Libft_bonus = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
 
-libft:
-	@echo "Compiling Libft.."
-	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory --silent
+get_next_line = get_next_line.c
 
-gnl:
-	@echo "Compiling get_next_line.."
-	@$(MAKE) -C $(GNL_DIR) --no-print-directory --silent
+srcs_libft = $(addprefix $(LibftDir)/, $(Libft))
+#srcs_libft_bonus = $(addprefix $(LibftDir)/, $(Libft_bonus))
+srcs_gnl = $(addprefix $(GnlDir)/, $(get_next_line))
+
+SRCS = $(srcs_libft) $(srcs_libft_bonus) $(srcs_gnl)
+
+OBJ = $(SRCS:.c=.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	ar rcs $(NAME) $(OBJ)
+
+%.o: %.c
+	cc -Wall -Wextra -Werror -c $< -o $@
 
 clean:
-	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory --silent
+	rm -f $(OBJ)
 
 fclean: clean
-	@$(MAKE) -C $(LIBFT_DIR) fclean --no-print-directory --silent
-	@rm -f $(LIB_NAME)
+	rm -f $(NAME)
+
+test: re
+	gcc main.c -L. -lft -o my_program
+	./my_program
 
 re: fclean all
 
-.PHONY: all libft clean fclean re
+
+.PHONY: all bonus clean fclean re

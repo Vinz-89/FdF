@@ -11,7 +11,7 @@ void map_parssing(t_fdf *map, char *string)
     map->map_data = malloc(map->map_y * sizeof(int *));
     if (!map->map_data)
         exit(-1);
-    
+
     for (int i = 0; i < map->map_y; i++)
     {
         map->map_data[i] = malloc(map->map_x * sizeof(int));
@@ -37,7 +37,7 @@ void map_parssing(t_fdf *map, char *string)
             map->map_data[y][x] = values[y][x];
     string = string;
     printf("Map loaded successfully!\n");
-    for (int y = 0; y < map->map_y; y++) 
+    for (int y = 0; y < map->map_y; y++)
    {
       for (int x = 0; x < map->map_x; x++)
          printf("%d ", map->map_data[y][x]);
@@ -247,11 +247,11 @@ void map_parsing(t_fdf *map, char *filename)
     }
 
     close(fd);
-    /*
+
     for(int i = 0; i < map->map_y; i++)
     {
         for (int j = 0; j < map->map_x; j++)
             printf("%d ", map->map_data[i][j]);
         printf("\n");
-    }*/
+    }
 }

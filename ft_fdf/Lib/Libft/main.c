@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
+/*
 #include "libft.h"
 #include <stdio.h>
 
 int main()
 {
 	printf("--------- Zone de test ---------\n");
-		
+
 	printf("== is stuff ==\n");
 	printf("a is alpha %d\n", ft_isalpha('a'));
 	printf("2 is digit %d\n", ft_isdigit('2'));
@@ -163,4 +163,4 @@ int main()
 
 	return 0;
 }
-
+*/

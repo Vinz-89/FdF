@@ -9,118 +9,132 @@ Events: When leaving the window
 static int	end_program(t_fdf *map)
 {
 	if (!map)
-		return 0;
-	//mlx_destroy_image(map->mlx, map->img);
+		return (0);
+	mlx_destroy_image(map->mlx, map->img);
 	mlx_destroy_window(map->mlx, map->win);
 	free(map);
 
 	exit(0);
-	return 0;
+	return (0);
 }
 
-void fdf_string_put(t_fdf *map, int x, int y, char *str)
+void	fdf_s_p(t_fdf *map, int x, int y, char *str)
 {
 	mlx_string_put(map->mlx, map->win, x, y, 0xFFFFFF, str);
 }
 
 
-
-
-
 void	hud(t_fdf *map)
 {
-	int	char_width;
-	int	x_axe;
-	int	y_axe;
-	int	z_axe;
 	int	text_x;
 
-	char_width = 7;
-	x_axe = map->angle_x;
-	y_axe = map->angle_y;
-	z_axe = map->angle_z;
-	text_x = (map->screen_W / 2) - (25 * char_width / 2);
-	fdf_string_put(map, text_x, 20, "FdF - vmeessen");
+	text_x = (map->screen_W / 2) - (25 * 7 / 2);
+	fdf_s_p(map, text_x, 20, "...:: FdF - vmeessen ::..");
+	hud_data(map);
+	hud_key(map);
+}
 
-	mlx_string_put(map->mlx, map->win, text_x, 20, 0xFFFFFF, "...:: FdF - vmeessen ::..");
-	fdf_string_put(map, 20, 40, ft_strjoin("Scale: ", ft_itoa(map->scale)));
-	mlx_string_put(map->mlx, map->win, 20, 80, 0xFFFFFF, ft_strjoin("Depth: ", ft_itoa(map->scale)));
-	fdf_string_put(map, 20, 100, ft_strjoin("Scale height: ", ft_itoa((int)(map->scale_height*100))));
-	mlx_string_put(map->mlx, map->win, 20, 100, 0xFFFFFF, ft_strjoin("Scale height: ", ft_itoa((int)(map->scale_height*100))));
-	fdf_string_put(map, 20, 120, ft_strjoin("Rotation x: ", ft_itoa(abs(x_axe%360))));
-	mlx_string_put(map->mlx, map->win, 20, 120, 0xFFFFFF, ft_strjoin("Rotation x: ", ft_itoa(abs(x_axe%360))));
-	fdf_string_put(map, 20, 140, ft_strjoin("Rotation y: ", ft_itoa(abs(y_axe%360))));
-	mlx_string_put(map->mlx, map->win, 20, 140, 0xFFFFFF, ft_strjoin("Rotation y: ", ft_itoa(abs(y_axe%360))));
-	fdf_string_put(map, 20, 160, ft_strjoin("Rotation z: ", ft_itoa(abs(z_axe%360))));
-	mlx_string_put(map->mlx, map->win, 20, 160, 0xFFFFFF, ft_strjoin("Rotation z: ", ft_itoa(abs(z_axe%360))));
-	fdf_string_put(map, 20, 180, ft_strjoin("Position x: ", ft_itoa(map->pos_x)));
-	mlx_string_put(map->mlx, map->win, 20, 180, 0xFFFFFF, ft_strjoin("Position x: ", ft_itoa(map->pos_x)));
-	fdf_string_put(map, 20, 200, ft_strjoin("Position y: ", ft_itoa(map->pos_y)));
-	mlx_string_put(map->mlx, map->win, 20, 200, 0xFFFFFF, ft_strjoin("Position y: ", ft_itoa(map->pos_y)));
+void	hud_data(t_fdf *map)
+{
+	int		scale_h;
+	char	*x_axe;
+	char	*y_axe;
+	char	*z_axe;
 
-	fdf_string_put(map, 20, map->screen_H - 220, "Exit: Escape key");
-	fdf_string_put(map, 20, map->screen_H - 200, "View: O(prespec) and P (iso)");
-	fdf_string_put(map, 20, map->screen_H - 180, "Scale height: T and G");
-	fdf_string_put(map, 20, map->screen_H - 160, "Depth: R and F");
-	fdf_string_put(map, 20, map->screen_H - 140, "Rotation x: A and D");
-	fdf_string_put(map, 20, map->screen_H - 120, "Rotation y: W and S");
-	fdf_string_put(map, 20, map->screen_H - 100, "Rotation z: Q and E");
-	fdf_string_put(map, 20, map->screen_H - 80, "Direction x: arrow keys");
+	scale_h = map->scale_height * 100;
+	x_axe = ft_itoa((int)map->angle_x % 360);
+	y_axe = ft_itoa((int)map->angle_y % 360);
+	z_axe = ft_itoa((int)map->angle_z % 360);
+	fdf_s_p(map, 20, 80, ft_strjoin("Depth: ", ft_itoa((int)(map->scale))));
+	fdf_s_p(map, 20, 100, ft_strjoin("Scale height: ", ft_itoa(scale_h)));
+	fdf_s_p(map, 20, 120, ft_strjoin("Rotation x: ", x_axe));
+	fdf_s_p(map, 20, 140, ft_strjoin("Rotation y: ", y_axe));
+	fdf_s_p(map, 20, 160, ft_strjoin("Rotation z: ", z_axe));
+	fdf_s_p(map, 20, 180, ft_strjoin("Position x: ", ft_itoa(map->pos_x)));
+	fdf_s_p(map, 20, 200, ft_strjoin("Position y: ", ft_itoa(map->pos_y)));
+}
+
+void	hud_key(t_fdf *map)
+{
+	fdf_s_p(map, 20, map->screen_H - 220, "Exit: Escape key");
+	fdf_s_p(map, 20, map->screen_H - 200, "View: O(persp) and P (iso)");
+	fdf_s_p(map, 20, map->screen_H - 180, "Scale height: T and G");
+	fdf_s_p(map, 20, map->screen_H - 160, "Depth: R and F");
+	fdf_s_p(map, 20, map->screen_H - 140, "Rotation x: A and D");
+	fdf_s_p(map, 20, map->screen_H - 120, "Rotation y: W and S");
+	fdf_s_p(map, 20, map->screen_H - 100, "Rotation z: Q and E");
+	fdf_s_p(map, 20, map->screen_H - 80, "move x and y: arrow keys");
 }
 
 
+/*
+'P' key - isometric view
+'O' key - perspective view
+'T' key - increase scale height
+'G' key - decrease scale height
+'R' key - increase depth
+'F' key - decrease depth
+*/
 int	key_pressed(int key, t_fdf *map)
 {
-	printf("->%d\n",key);
-	// Movement
-	if (key == 65362) // UP arrow key
-		map->pos_y -= 20;
-	else if (key == 65364) // DOWN arrow key
-		map->pos_y += 20;
-	else if (key == 65361) // LEFT arrow key
-		map->pos_x -= 20;
-	else if (key == 65363) // RIGHT arrow key
-		map->pos_x += 20;
-
-	// Rotation
-	else if (key == 97) // 'A' key - Rotate up (X-axis)
-		map->angle_y -= 5;
-	else if (key == 100) // 'D' key - Rotate down (X-axis)
-		map->angle_y += 5;
-	else if (key == 119) // 'W' key - Rotate left (Y-axis)
-		map->angle_x += 5;
-	else if (key == 115) // 'S' key - Rotate right (Y-axis)
-		map->angle_x -= 5;
-	else if (key == 113)  // 'Q' key - Rotate counterclockwise (Z-axis)
-		map->angle_z -= 5;
-	else if (key == 101) // 'E' key - Rotate clockwise (Z-axis)
-		map->angle_z += 5;
-	// Scale
-	else if (key == 114)  // 'R' key - increase depth
-		map->scale += 1;
-	else if (key == 102)  // 'F' key - decrease depth
-		map->scale -= 1;
-	else if (key == 116)  // 'T' key - increase scale height
-		map->scale_height += 0.01;
-	else if (key == 103)  // 'G' key - decrease scale height
-		map->scale_height -= 0.01;
-
-	// View
-	else if (key == 112)  // 'P' key - isometric view
-		map->view_type = 0;
-	else if (key == 111)  // 'O' key - perspective view
-		map->view_type = 1;
-
-	else if (key == 65307)
+	if (key == 65307)
 		end_program(map);
-
+	else if (key == 112)
+		map->view_type = 0;
+	else if (key == 111)
+		map->view_type = 1;
+	else if (key == 116)
+		map->scale_height += 0.01;
+	else if (key == 103)
+		map->scale_height -= 0.01;
+	else if (key == 114)
+		map->scale += 1;
+	else if (key == 102)
+		map->scale -= 1;
+	else
+		key_pressed_mouvement(key, map);
 	return (0);
 }
 
+/*
+'UP' key - decrease Y position
+'DOWN' key - increase Y position
+'LEFT' key - decrease X position
+'RIGHT' key - increase X position
+'A' key - rotate up (X-axis)
+'D' key - rotate down (X-axis)
+'W' key - rotate left (Y-axis)
+'S' key - rotate right (Y-axis)
+'Q' key - rotate counterclockwise (Z-axis)
+'E' key - rotate clockwise (Z-axis)
+*/
+void key_pressed_mouvement(int key, t_fdf *map)
+{
+	if (key == 65362)
+		map->pos_y -= 20;
+	else if (key == 65364)
+		map->pos_y += 20;
+	else if (key == 65361)
+		map->pos_x -= 20;
+	else if (key == 65363)
+		map->pos_x += 20;
+	else if (key == 97)
+		map->angle_y -= 5;
+	else if (key == 100)
+		map->angle_y += 5;
+	else if (key == 119)
+		map->angle_x += 5;
+	else if (key == 115)
+		map->angle_x -= 5;
+	else if (key == 113)
+		map->angle_z -= 5;
+	else if (key == 101)
+		map->angle_z += 5;
+}
 
 int	draw(t_fdf *map)
 {
-	if(map->img)
+	if (map->img)
 		mlx_destroy_image(map->mlx, map->img);
 	map->img = mlx_new_image(map->mlx, map->screen_W, map->screen_H);
 	map->img_addr = mlx_get_data_addr(map->img, &(map->img_bits_per_pixel), &(map->img_line_length), &(map->img_endian));
@@ -137,14 +151,12 @@ int	draw(t_fdf *map)
 
 
 /*
-17:DestroyNotify
-
+42: 42.fdf
+Little Montain: 42.fdf
 Semi-Flat: pylone.fdf
+Big: julia.fdf
+Pentenegpos:
 
-
-
-
-le sujet donne un angle plus ou moins pour (40,-20,40)
 */
 int	main(int argc, char *argv[])
 {
@@ -157,6 +169,9 @@ int	main(int argc, char *argv[])
 	}
 	map = malloc(sizeof(t_fdf));
 	if (!map)
+		exit(-1);
+	map->coord = malloc(sizeof(t_coord));
+	if (!map->coord)
 		exit(-1);
 	map->pos_x = 0;
 	map->pos_y = 0;

@@ -11,9 +11,22 @@
 # include <fcntl.h>
 # include <math.h>
 
-
 # include <stdio.h>
 # include <stdlib.h>
+
+typedef struct s_coord
+{
+	int x1;
+	int y1;
+	int z1;
+	int x2;
+	int y2;
+	int z2;
+	int sx;
+    int sy;
+    int color1;
+    int color2;
+}	t_coord;
 
 typedef struct s_fdf
 {
@@ -35,6 +48,7 @@ typedef struct s_fdf
 	int map_min_z;
 	int map_max_z;
 
+	t_coord	*coord;
 
 	void	*mlx;
 	void	*win;
@@ -61,11 +75,19 @@ int	get_g(int trgb);
 int	get_b(int trgb);
 
 void draw_map(t_fdf *map);
-void draw_line(t_fdf *map, int x0, int y0, int x1, int y1, int color1, int color2);
+void draw_line(t_fdf *map, t_coord* coord, int color1, int color2);
+//void draw_line(t_fdf *map, t_coord *coord);
+//void draw_line(t_fdf *map, int x0, int y0, int x1, int y1, int color1, int color2);
 void project_iso(int *x, int *y, int *z, t_fdf *map);
 void project_perspec(int *x, int *y, int *z, t_fdf *map);
 
 int interpolate_color(int color1, int color2, double ratio);
 
+
+void	hud(t_fdf *map);
+void	hud_data(t_fdf *map);
+void	hud_key(t_fdf *map);
+int		key_pressed(int key, t_fdf *map);
+void	key_pressed_mouvement(int key, t_fdf *map);
 
 #endif
