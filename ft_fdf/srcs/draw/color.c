@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmeessen <vmeessen@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 10:20:11 by vmeessen          #+#    #+#             */
-/*   Updated: 2024/11/05 10:20:11 by vmeessen         ###   ########.fr       */
+/*   Created: 2025/04/14 12:31:40 by vmeessen          #+#    #+#             */
+/*   Updated: 2025/04/14 12:31:40 by vmeessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_strdup(const char *s)
+int	trgb_to_int(int t, int r, int g, int b)
 {
-	int		i;
-	int		size;
-	char	*copy;
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 
-	if (!s)
-		return (NULL);
-	size = ft_strlen(s);
-	copy = malloc(sizeof(char) * (size + 1));
-	if (copy == NULL)
-		return (NULL);
-	i = 0;
-	while (i < size)
-	{
-		copy[i] = s[i];
-		i++;
-	}
-	copy[size] = 0;
-	return (copy);
+int	get_t(int trgb)
+{
+	return ((trgb >> 24) & 0xFF);
+}
+
+int	get_r(int trgb)
+{
+	return ((trgb >> 16) & 0xFF);
+}
+
+int	get_g(int trgb)
+{
+	return ((trgb >> 8) & 0xFF);
+}
+
+int	get_b(int trgb)
+{
+	return (trgb & 0xFF);
 }
