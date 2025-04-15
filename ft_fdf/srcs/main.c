@@ -26,15 +26,14 @@ static int	end_program(t_fdf *map)
 		mlx_destroy_image(map->mlx, map->img);
 	if (map->img && map->win)
 		mlx_destroy_window(map->mlx, map->win);
+	if (map->mlx)
+	{
+		mlx_destroy_display(map->mlx);
+		free(map->mlx);
+	}
 	free_map_data(map);
 	if (map->coord)
-	{
 		free(map->coord);
-		map->coord = NULL;
-	}
-	if (map->mlx)
-		free(map->mlx);
-	//free(map->img_addr);
 	free(map);
 	exit(0);
 	return (0);

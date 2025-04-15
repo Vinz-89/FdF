@@ -7,7 +7,7 @@ LFLAGS = -lmlx -lXext -lX11 -lm
 
 RM = rm -rf
 
-SRCS = main.c hud.c hud_util.c parsing/parsing.c parsing/utils.c draw/draw.c draw/draw_basic.c draw/color.c draw/color2.c draw/views.c
+SRCS = main.c hud.c hud_util.c parsing/parsing.c parsing/parsing_exit.c parsing/parsing_setup.c parsing/utils.c draw/draw.c draw/draw_basic.c draw/color.c draw/color2.c draw/views.c
 SRCS_ = $(addprefix srcs/, $(SRCS))
 
 LIBDIR = Lib

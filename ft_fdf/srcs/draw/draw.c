@@ -27,7 +27,7 @@ void	calculate_projected_coords(t_fdf *map, long *x, long *y, long *z)
 	*y += (map->screen_h / 2) + map->pos_y;
 }
 
-void fix_coord_outofbound(t_fdf *map)
+void	fix_coord_outofbound(t_fdf *map)
 {
 	if (map->coord->x1 > 0 && map->coord->x1 * map->scale > INT_MAX)
 		map->coord->x1 = INT_MAX / map->scale;
@@ -55,7 +55,6 @@ void fix_coord_outofbound(t_fdf *map)
 		map->coord->z2 = INT_MIN / map->scale;
 }
 
-
 /*
 Dessine la ligne entre 2 points dans map->coord
 */
@@ -72,7 +71,6 @@ void	draw_projected_line(t_fdf *map)
 	max_z = map->map_max_z;
 	color1 = calculate_color(coord->z1, min_z, max_z);
 	color2 = calculate_color(coord->z2, min_z, max_z);
-
 	fix_coord_outofbound(map);
 	coord->x1 *= map->scale;
 	coord->y1 *= map->scale;

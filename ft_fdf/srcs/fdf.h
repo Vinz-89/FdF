@@ -37,8 +37,8 @@ typedef struct s_coord
 	long	dy;
 	long	sx;
 	long	sy;
-	int	color1;
-	int	color2;
+	int		color1;
+	int		color2;
 }	t_coord;
 
 typedef struct s_fdf
@@ -74,6 +74,11 @@ long	ft_atoi(const char *nptr);
 long	ft_abs(long value);
 void	map_parsing(t_fdf *map, char *filename);
 void	free_map_data(t_fdf *map);
+void	free_split(char **split);
+void	error_cl_exit(t_fdf *map);
+void	handle_file_error(int fd, t_fdf *map);
+void	allocate_map_data(t_fdf *map);
+void	process_values(t_fdf *map, int y, char *line, int fd);
 
 int		trgb_to_int(int t, int r, int g, int b);
 int		get_t(int trgb);
