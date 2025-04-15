@@ -142,25 +142,23 @@ int	main(int argc, char *argv[])
 
 	if (argc < 2)
 	{
-		ft_putstr_fd("Usage : ./fdf <filename>\n", 2);
+		ft_putstr_fd("Usage : ./fdf <filename.fdf>\n", 2);
 		return (1);
 	}
 	map = malloc(sizeof(t_fdf));
 	if (!map)
 		exit(-1);
 	setup_var(map);
+	map_parsing(map, argv[1]);
+	fix_scale_height(map);
 	map->mlx = mlx_init();
 	map->win = mlx_new_window(map->mlx, map->screen_w, map->screen_h,
 			"FdF - vmeessen");
-	map_parsing(map, argv[1]);
-	printf("%s", argv[0]);
 	mlx_hook(map->win, 17, 0, end_program, map);
 	mlx_hook(map->win, 2, 1L << 0, key_pressed, map);
-	//mlx_loop_hook(map->mlx, draw, map);
-	//mlx_loop_hook(map->mlx, NULL, map);
+	mlx_loop_hook(map->mlx, draw, map);
 	draw(map);
 	mlx_loop(map->mlx);
-	printf(" 3\n");
 	end_program(map);
 	return (0);
 }

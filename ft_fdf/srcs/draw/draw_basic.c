@@ -6,7 +6,7 @@
 /*   By: vmeessen <vmeessen@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:18:48 by vmeessen          #+#    #+#             */
-/*   Updated: 2025/04/14 13:50:18 by vmeessen         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:27:45 by vmeessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 /*
 Put pixel on screen if it is in the range of the screen
 */
-void	put_pixel(t_fdf *map, int p_x, int p_y, int color)
+void	put_pixel(t_fdf *map, long p_x, long p_y, int color)
 {
 	int		i;
 
-	if (p_x < 0 || p_x >= map->screen_w || p_y < 0 || p_y >= map->screen_h)
+	//printf("%ld %ld\n\n", (long)map->screen_w, (long)map->screen_h);
+	if (p_x < 0 || p_x >= (long)map->screen_w || p_y < 0 || p_y >= (long)map->screen_h)
 		return ;
+	//printf("%ld %ld\n", p_x, p_y);
 	i = (p_x * map->img_bits_per_pixel / 8) + (p_y * map->img_line_length);
 	map->img_addr[i] = get_b(color);
 	map->img_addr[++i] = get_g(color);
@@ -49,8 +51,8 @@ void	draw_backg(t_fdf *map, int color)
 
 static void	initialize_line(t_coord *coord, int *err, int *length)
 {
-	coord->dx = abs(coord->x2 - coord->x1);
-	coord->dy = abs(coord->y2 - coord->y1);
+	coord->dx = ft_abs(coord->x2 - coord->x1);
+	coord->dy = ft_abs(coord->y2 - coord->y1);
 	if (coord->x1 < coord->x2)
 		coord->sx = 1;
 	else
@@ -97,7 +99,7 @@ void	draw_line(t_fdf *map, t_coord *coord, int color1, int color2)
 	step = 0;
 	while (coord->x1 != coord->x2 || coord->y1 != coord->y2)
 	{
-		color = interpolate_color(color1, color2, (double)(step / length));
+		color = interpolate_color(color1, color2, (double)step / length);
 		put_pixel(map, coord->x1, coord->y1, color);
 		update_line_position(coord, &err);
 		step++;

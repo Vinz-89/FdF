@@ -6,7 +6,7 @@
 /*   By: vmeessen <vmeessen@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:42:13 by vmeessen          #+#    #+#             */
-/*   Updated: 2025/04/14 13:44:33 by vmeessen         ###   ########.fr       */
+/*   Updated: 2025/04/15 13:56:07 by vmeessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Permet de calculer la position après projection iso
 	- x2 = (x {+ 1} - y) * cos(30°)
 	- y2 = (x {+ 1} + y) * sin(30°) - z
 */
-void	project_iso(int *x, int *y, int *z, t_fdf *map)
+void	project_iso(long *x, long *y, long *z, t_fdf *map)
 {
 	double	tmp_x;
 	double	tmp_y;
@@ -30,8 +30,8 @@ void	project_iso(int *x, int *y, int *z, t_fdf *map)
 	tmp_y = *y;
 	tmp_z = *z;
 	*map = *map;
-	*x = (int)((tmp_x - tmp_y) * cos(M_PI / 6));
-	*y = (int)((tmp_x + tmp_y) * sin(M_PI / 6) - tmp_z * map->scale_height);
+	*x = (long)((tmp_x - tmp_y) * cos(M_PI / 6));
+	*y = (long)((tmp_x + tmp_y) * sin(M_PI / 6) - tmp_z * map->scale_height);
 	*z = *z;
 }
 
@@ -89,7 +89,7 @@ Permet de calculer la position après projection en perspective
         - x''' = x'' * cos(angle_z) - y'' * sin(angle_z)
         - y''' = x'' * sin(angle_z) + y'' * cos(angle_z)
 */
-void	project_perspec(int *x, int *y, int *z, t_fdf *map)
+void	project_perspec(long *x, long *y, long *z, t_fdf *map)
 {
 	double	px;
 	double	py;
@@ -101,7 +101,7 @@ void	project_perspec(int *x, int *y, int *z, t_fdf *map)
 	project_perspec_axe_x(&px, &py, &pz, map);
 	project_perspec_axe_y(&px, &py, &pz, map);
 	project_perspec_axe_z(&px, &py, &pz, map);
-	*x = (int)px;
-	*y = (int)py;
-	*z = (int)pz;
+	*x = (long)px;
+	*y = (long)py;
+	*z = (long)pz;
 }

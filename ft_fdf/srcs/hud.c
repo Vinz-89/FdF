@@ -6,17 +6,12 @@
 /*   By: vmeessen <vmeessen@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:52:39 by vmeessen          #+#    #+#             */
-/*   Updated: 2025/04/14 18:04:42 by vmeessen         ###   ########.fr       */
+/*   Updated: 2025/04/15 15:24:44 by vmeessen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "../Lib/Libft/libft.h"
-
-void	fdf_s_p(t_fdf *map, int x, int y, char *str)
-{
-	mlx_string_put(map->mlx, map->win, x, y, 0xFFFFFF, str);
-}
 
 void	hud(t_fdf *map)
 {
@@ -26,27 +21,6 @@ void	hud(t_fdf *map)
 	fdf_s_p(map, text_x, 20, "...:: FdF - vmeessen ::..");
 	hud_data(map);
 	hud_key(map);
-}
-
-void	fdf_s_p_l(t_fdf *map, int y, char *str1, char *str2)
-{
-	char	*str;
-
-	str = ft_strjoin(str1, str2);
-	mlx_string_put(map->mlx, map->win, 20, y, 0xFFFFFF, str);
-	free(str);
-}
-
-void	fdf_s_p_l_n(t_fdf *map, int y, char *str1, int nb)
-{
-	char	*str;
-	char	*nbstr;
-
-	nbstr = ft_itoa(nb);
-	str = ft_strjoin(str1, nbstr);
-	free(nbstr);
-	mlx_string_put(map->mlx, map->win, 20, y, 0xFFFFFF, str);
-	free(str);
 }
 
 void	hud_data(t_fdf *map)
@@ -82,6 +56,20 @@ void	hud_key(t_fdf *map)
 	fdf_s_p(map, 20, map->screen_h - 120, "Rotation y: W and S");
 	fdf_s_p(map, 20, map->screen_h - 100, "Rotation z: Q and E");
 	fdf_s_p(map, 20, map->screen_h - 80, "move x and y: arrow keys");
+}
+
+void	fix_scale_height(t_fdf	*map)
+{
+	long	value;
+
+	value = (long)map->map_max_z;
+	if (value < (long)map->map_min_z * -1)
+		value = (long)map->map_min_z * -1;
+	if (value > INT_MAX)
+		value = INT_MAX;
+	if (value == 0)
+		value = 1;
+	map->scale_height = 0.8 / value;
 }
 
 int	draw(t_fdf *map)
