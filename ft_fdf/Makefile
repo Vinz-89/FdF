@@ -46,9 +46,11 @@ minilibx:
 clean:
 	rm -f $(OBJ)
 	$(MAKE) -C $(LIBDIR) clean
+	$(MAKE) -C $(MINILIBXDIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) -C $(LIBDIR) fclean
+	$(MAKE) -C $(MINILIBXDIR) clean
 
 re: fclean all
