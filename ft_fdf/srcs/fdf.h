@@ -23,7 +23,7 @@
 # include <math.h>
 # include <limits.h> // pour les INT_MIN/MAX
 
-# include <stdio.h>
+//# include <stdio.h>
 
 typedef struct s_coord
 {
