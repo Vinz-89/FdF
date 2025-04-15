@@ -1,3 +1,5 @@
 # valgrind --leak-check=full --trace-children=yes --track-fds=yes
 
 [![Watch the demo](thumbnail.png)](https://github.com/user-attachments/assets/1dd04cf5-ed2f-4089-bfb2-bbcad9475203)
+[🎥 Watch Demo Video](./video/translation.mp4)
+https://github.com/user-attachments/assets/2639747f-354a-4d2a-8077-f97b24405cfd
