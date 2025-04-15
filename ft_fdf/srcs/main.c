@@ -114,8 +114,8 @@ void	setup_var(t_fdf *map)
 	}
 	map->pos_x = 0;
 	map->pos_y = 0;
-	map->screen_w = 1800; // 1600
-	map->screen_h = 1000; // 2000
+	map->screen_w = 1600;
+	map->screen_h = 2000;
 	map->angle_x = 0;
 	map->angle_y = 0;
 	map->angle_z = 0;
