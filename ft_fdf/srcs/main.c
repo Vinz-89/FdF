@@ -139,7 +139,7 @@ int	main(int argc, char *argv[])
 {
 	t_fdf	*map;
 
-	if (argc < 2)
+	if (argc != 2)
 	{
 		ft_putstr_fd("Usage : ./fdf <filename.fdf>\n", 2);
 		return (1);
